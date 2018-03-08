@@ -9,5 +9,18 @@
     <div class="container-fluid" style="background-color: coral">
       <p>Welcome to the Chat Playground</p>
     </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      let socket = io();
+
+      socket.on('connect', () => {
+        console.log('Connected to server');
+      });
+
+      socket.on('disconnect', () => {
+        console.log('Disconnected from server');
+      })
+    </script>
   </body>
 </html>
