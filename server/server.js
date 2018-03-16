@@ -23,21 +23,38 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
   console.log('New user connected!');
 
-  // socket.emit('newMessage', {
-  //   from: 'server',
-  //   text: 'Greetings from server!',
-  //   createdAt: new Date().toLocaleString()
-  // });
+  socket.emit('newMessage', {
+    from: 'Admin',
+    text: 'Welcome to the Chat Playground'
+  });
 
-  socket.on('createMessage', (newMessage) => {
-    let message = newMessage;
-    message.createdAt = new Date().toLocaleString();
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'New user joined',
+    createdAt: new Date().toLocaleString()
+  });
+
+  socket.on('createMessage', (message) => {
     console.log('createMessage', message);
-    io.emit('newMessage', message)
+    io.emit('newMessage', {
+      from: message.from,
+      text: message.text,
+      createdAt: new Date().toLocaleString()
+    })
+    // socket.broadcast.emit('newMessage', {
+    //   from: message.from,
+    //   text: message.text,
+    //   createdAt: new Date().toLocaleString()
+    // })
   });
 
   socket.on('disconnect', () => {
     console.log('User disconnected...');
+    socket.broadcast.emit('newMessage', {
+      from: 'Admin',
+      text: 'One user has left the room...',
+      createdAt: new Date().toLocaleString()
+    })
   });
 });
 
