@@ -23,14 +23,17 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
   console.log('New user connected!');
 
-  socket.emit('newMessage', {
-    from: 'example@example.com',
-    text: 'How r u!',
-    createdAt: new Date().toLocaleString()
-  });
+  // socket.emit('newMessage', {
+  //   from: 'server',
+  //   text: 'Greetings from server!',
+  //   createdAt: new Date().toLocaleString()
+  // });
 
-  socket.on('createMessage', (message) => {
+  socket.on('createMessage', (newMessage) => {
+    let message = newMessage;
+    message.createdAt = new Date().toLocaleString();
     console.log('createMessage', message);
+    io.emit('newMessage', message)
   });
 
   socket.on('disconnect', () => {
