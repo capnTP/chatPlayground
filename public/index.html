@@ -3,6 +3,22 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      .form-container {
+        position: absolute;
+        margin: 0;
+        padding: 5px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #messages {
+        list-style-type: none;
+        border: 3px solid red;
+        padding: 50px;
+        text-align: center;
+      }
+    </style>
     <title>The Chat Playground</title>
   </head>
   <body>
@@ -10,7 +26,18 @@
       <p>Welcome to the Chat Playground</p>
     </div>
 
+    <ul id="messages">
+
+    </ul>
+    <div class="form-container">
+      <form id="message-form">
+        <input type="text" name="message" placeholder="Type anything here..."/>
+        <button>Send</button>
+      </form>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/libs/jquery-3.3.1.min.js"></script>
     <script src="/js/index.js"></script>
   </body>
 </html>
