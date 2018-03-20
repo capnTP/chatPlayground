@@ -8,14 +8,14 @@ socket.on('disconnect', function () {
   console.log('Disconnected from server');
 });
 
-$(document).ready(function() {
-  socket.on('newMessage', function (message) {
-    console.log('New message', message);
-    let li = jQuery('<li></li>');
-    li.text(`${message.from}: ${message.text}`);
+socket.on('newMessage', function (message) {
+ console.log('New message', message);
+ let li = jQuery('<li></li>');
+ li.text(`${message.from}: ${message.text}`);
 
-    jQuery('#messages').append(li);
-  });
+ jQuery('#messages').append(li);
+ $('#messages').animate({ scrollTop: $('#messages').prop("scrollHeight") }, 3000)
+});
 
 
 // socket.emit('createMessage', {
@@ -25,14 +25,12 @@ $(document).ready(function() {
 //   console.log('Got it', res);
 // })
 
-  jQuery('#message-form').on('submit', function (e) {
-    e.preventDefault();
-    $('#messages').animate({ scrollTop: $('#messages').prop("scrollHeight") }, 2000)
-    socket.emit('createMessage', {
-      from: 'User',
-      text: jQuery('[name=message]').val()
-    }, function () {
+jQuery('#message-form').on('submit', function (e) {
+ e.preventDefault();
+ socket.emit('createMessage', {
+   from: 'User',
+   text: jQuery('[name=message]').val()
+ }, function () {
 
-    })
-  });
+ })
 });
