@@ -18,6 +18,7 @@ socket.on('newMessage', function (message) {
   });
 
   jQuery('#messages').append(html);
+  $('#messages').animate({ scrollTop: $('#messages').prop("scrollHeight") }, 3000)
 });
 
 socket.on('newLocationMessage', function (message) {
@@ -30,6 +31,7 @@ socket.on('newLocationMessage', function (message) {
   });
 
   $('#messages').append(html);
+  $('#messages').animate({ scrollTop: $('#messages').prop("scrollHeight") }, 3000)
 });
 
 jQuery('#message-form').on('submit', function (e) {
