@@ -123,6 +123,22 @@ button:disabled {
   overflow: -moz-scrollbars-none;
   -webkit-overflow-scrolling: touch;
 }
+.message {
+  padding: 10px;
+}
+.message_title {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.message_title h4 {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.message_title span {
+  color: #999;
+}
 #messages::-webkit-scrollbar {
   width: 0;
 }

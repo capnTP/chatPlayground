@@ -6,7 +6,8 @@
     <script src="/js/libs/jquery-3.3.1.min.js"></script>
     <script src="/js/libs/babel.min.js"></script>
     <script src="/js/libs/moment.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="/js/libs/mustache.min.js"></script>
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="/css/styles.css">
 
     <title>The Chat Playground</title>
@@ -34,8 +35,32 @@
           <button id="send-location">Send location</button>
         </div>
       </div>
-
     </div>
+
+    <script id="message-template" type="text/template">
+      <li class="message">
+        <div class="message_title">
+          <h4>{{from}}</h4>
+          <span>{{createdAt}}</span>
+        </div>
+        <div class="message_body">
+          <p>{{text}}</p>
+        </div>
+      </li>
+    </script>
+
+    <script id="location-message-template" type="text/template">
+      <li class="message">
+        <div class="message_title">
+          <h4>{{from}}</h4>
+          <span>{{createdAt}}</span>
+        </div>
+        <div class="message_body">
+          <p><a href="{{url}}" target="_blank">My current location</a></p>
+        </div>
+      </li>
+    </script>
+    
     <script type="text/babel" src="/js/index.js"></script>
   </body>
 </html>
