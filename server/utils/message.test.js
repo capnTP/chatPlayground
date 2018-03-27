@@ -7,7 +7,7 @@ describe('generateMessage', () => {
     expect(generateMessage('Admin', 'test')).toMatchObject({
       from: 'Admin',
       text: 'test',
-      createdAt: expect.any(String)
+      createdAt: expect.any(Number)
     })
   })
 });
