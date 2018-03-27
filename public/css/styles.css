@@ -65,11 +65,11 @@ button:disabled {
   margin: 10px 20px;
   text-align: left;
 }
-.chat__sidebar ul {
+.chat_sidebar ul {
   list-style-type: none;
 }
 
-.chat__sidebar li {
+.chat_sidebar li {
   background: #e6eaee;
   border: 1px solid #e1e1e1;
   border-radius: 5px;
@@ -142,24 +142,24 @@ button:disabled {
 #messages::-webkit-scrollbar {
   width: 0;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   * {
     font-size: 1rem;
   }
 
-  .chat__sidebar {
+  .chat_sidebar {
     display: none;
   }
 
-  .chat__footer {
+  .chat_footer {
     flex-direction: column;
   }
 
-  .chat__footer form {
+  .chat_footer form {
     margin-bottom: 10px;
   }
 
-  .chat__footer button {
+  .chat_footer button {
     margin-right: 0px;
   }
 }
