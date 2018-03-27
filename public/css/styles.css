@@ -52,7 +52,7 @@ button:disabled {
   overflow-y: auto;
   min-width: 250px;
   max-width: 250px;
-  min-height: 100vh;
+  height: 100vh;
   background: -moz-linear-gradient(125deg, rgba(241,79,50,1) 0%, rgba(248,39,13,1) 100%); /* ff3.6+ */
   background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(241,112,92,1)), color-stop(100%, rgba(248,39,13,1))); /* safari4+,chrome */
   background: -webkit-linear-gradient(125deg, rgba(241,79,50,1) 0%, rgba(248,39,13,1) 100%); /* safari5.1+,chrome10+ */
