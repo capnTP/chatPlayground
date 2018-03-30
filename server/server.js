@@ -11,14 +11,14 @@ let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
 
-app.set('view engine', 'hbs');
-// app.set('view engine', 'html');
-// app.engine('html', require('hbs').__express);
+// app.set('view engine', 'hbs');
 
-app.use(express.static(publicPath));
+app.use(express.static(publicPath, {
+  extensions: ['html']
+}));
 
-// app.get('/', (req, res) => {
-//   res.render('index')
+// app.get('/chat', (req, res) => {
+//   res.render('chat.hbs')
 // });
 
 io.on('connection', (socket) => {

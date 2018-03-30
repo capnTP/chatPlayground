@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" charset="utf-8">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/libs/jquery-3.3.1.min.js"></script>
+    <script src="/js/libs/babel.min.js"></script>
+    <script src="/js/libs/moment.min.js"></script>
+    <script src="/js/libs/mustache.min.js"></script>
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <title>The Chat Playground</title>
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <div class="chat_sidebar">
+        <h3>Friends</h3>
+        <div id="users"></div>
+      </div>
+
+      <div class="chat_main">
+        <!-- <button type="button" id="sidebarCollapse" class="btn-sidebar">
+          <i class="glyphicon glyphicon-align-left"></i>
+          Toggle Sidebar
+        </button> -->
+        <ul id="messages" class="chat_messages"></ul>
+
+        <div class="chat_footer">
+          <form id="message-form">
+            <input type="text" name="message" placeholder="Type anything here..." autofocus autocomplete="off"/>
+            <button>Send</button>
+          </form>
+          <button id="send-location">Send location</button>
+        </div>
+      </div>
+    </div>
+
+    <script id="message-template" type="text/template">
+      <li class="message">
+        <div class="message_title">
+          <h4>{{from}}</h4>
+          <span>{{createdAt}}</span>
+        </div>
+        <div class="message_body">
+          <p>{{text}}</p>
+        </div>
+      </li>
+    </script>
+
+    <script id="location-message-template" type="text/template">
+      <li class="message">
+        <div class="message_title">
+          <h4>{{from}}</h4>
+          <span>{{createdAt}}</span>
+        </div>
+        <div class="message_body">
+          <p><a href="{{url}}" target="_blank">My current location</a></p>
+        </div>
+      </li>
+    </script>
+
+    <script type="text/babel" src="/js/chat.js"></script>
+  </body>
+</html>
