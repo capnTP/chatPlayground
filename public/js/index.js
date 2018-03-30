@@ -1,5 +1,21 @@
 let socket = io();
 
+// let scrollToBottom = () => {
+//   // selectors - messages view
+//   let messages = $('#messages');
+//   let newMessage = messages.children('li:last-child');
+//   // height variables
+//   let clientHeight = messages.prop('clientHeight');
+//   let scrollTop = messages.prop('scrollTop');
+//   let scrollHeight = messages.prop('scrollHeight');
+//   let newMessageHeight = newMessage.innerHeight();
+//   let lastMessageHeight = newMessage.prev().innerHeight();
+//
+//   if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
+//     messages.scrollTop(scrollHeight);
+//   }
+// };
+
 socket.on('connect', function () {
   console.log('Connected to server');
 });
@@ -18,7 +34,8 @@ socket.on('newMessage', function (message) {
   });
 
   jQuery('#messages').append(html);
-  $('#messages').animate({ scrollTop: $('#messages').prop("scrollHeight") }, 3000)
+  $('#messages').animate({ scrollTop: $('#messages').prop("scrollHeight") }, 1000);
+  // scrollToBottom();
 });
 
 socket.on('newLocationMessage', function (message) {
@@ -31,7 +48,8 @@ socket.on('newLocationMessage', function (message) {
   });
 
   $('#messages').append(html);
-  $('#messages').animate({ scrollTop: $('#messages').prop("scrollHeight") }, 3000)
+  $('#messages').animate({ scrollTop: $('#messages').prop("scrollHeight") }, 1000);
+  // scrollToBottom();
 });
 
 jQuery('#message-form').on('submit', function (e) {
