@@ -17,12 +17,37 @@ let socket = io();
 // };
 
 socket.on('connect', function () {
-  console.log('Connected to server');
+  let params = $.deparam(window.location.search);
+
+  socket.emit('join', params, (err) => {
+    if (err) {
+      bootbox.alert({
+        message: err,
+        backdrop: true,
+        callback: () => {
+          window.location.href = '/';
+        }
+      })
+    } else {
+      console.log('Successful joining!');
+    }
+  });
+  // console.log('Connected to server');
 });
 
 socket.on('disconnect', function () {
   console.log('Disconnected from server');
 });
+
+socket.on('updateUserList', (users) => {
+  let ol = $('<ol></ol>');
+
+  users.forEach((user) => {
+    ol.append($('<li></li>').text(user));
+  });
+
+  $('#users').html(ol);
+})
 
 socket.on('newMessage', function (message) {
   let formattedTime = moment(message.createdAt).format('h:mm A');

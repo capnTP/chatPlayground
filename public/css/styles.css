@@ -31,6 +31,12 @@ button {
   border: solid #b82b34 0px;
   text-decoration: none;
 }
+button:focus {
+  outline: red inset 1.5px;
+}
+button:active {
+  outline: red inset 1.5px;
+}
 button:hover {
   background: #fa3c4f;
   background-image: -webkit-linear-gradient(top, #fa3c4f, #d93434);
@@ -101,7 +107,7 @@ button:disabled {
   background: linear-gradient(325deg, rgba(241,79,50,1) 0%, rgba(248,39,13,1) 100%); /* w3c */
 }
 .chat_sidebar h3 {
-  color: #e6eaee;
+  color: #ffffff;
   margin: 10px 20px;
   text-align: left;
 }
@@ -110,7 +116,7 @@ button:disabled {
 }
 
 .chat_sidebar li {
-  background: #e6eaee;
+  background: #fff3e6;
   border: 1px solid #e1e1e1;
   border-radius: 5px;
   padding: 10px;
@@ -172,6 +178,7 @@ button:disabled {
 }
 
 .message_title h4 {
+  font-size: .95rem;
   font-weight: 600;
   margin-right: 10px;
 }
@@ -179,10 +186,26 @@ button:disabled {
 .message_title span {
   color: #999;
 }
+
+.message_body p {
+  padding: 0;
+  margin: 0;
+}
+
+button.close {
+  background: 0;
+}
+
+.btn.btn-primary {
+  background-color: transparent;
+  border-color: transparent;
+  outline: 0px;
+}
+
 #messages::-webkit-scrollbar {
   width: 0;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   * {
     font-size: 1rem;
   }
