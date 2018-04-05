@@ -32,7 +32,6 @@ socket.on('connect', function () {
       console.log('Successful joining!');
     }
   });
-  // console.log('Connected to server');
 });
 
 socket.on('disconnect', function () {
@@ -80,12 +79,14 @@ socket.on('newLocationMessage', function (message) {
 jQuery('#message-form').on('submit', function (e) {
  e.preventDefault();
  let messageTextbox = $('[name=message]');
- socket.emit('createMessage', {
-   from: 'User',
-   text: messageTextbox.val()
- }, function () {
-   messageTextbox.val('')
- })
+
+ if (messageTextbox.val().trim().length > 0) {
+   socket.emit('createMessage', {
+     text: messageTextbox.val()
+   }, function () {
+     messageTextbox.val('')
+   })
+ }
 });
 
 let locationButton = $('#send-location');
