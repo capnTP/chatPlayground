@@ -42,7 +42,7 @@ socket.on('updateUserList', (users) => {
   let ol = $('<ol></ol>');
 
   users.forEach((user) => {
-    ol.append($('<li></li>').text(user));
+    ol.append($('<li></li>').text(user.charAt(0).toUpperCase() + user.slice(1)));
   });
 
   $('#users').html(ol);
