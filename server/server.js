@@ -30,6 +30,7 @@ io.on('connection', (socket) => {
   socket.on('join', (params, callback) => {
     let user = CryptoJS.AES.decrypt(params.name, params.k).toString(CryptoJS.enc.Utf8);
     let session = CryptoJS.AES.decrypt(params.room, params.k).toString(CryptoJS.enc.Utf8);
+    user = user.charAt(0).toUpperCase() + user.slice(1);
     if (isDuplicate({user, session}, users.users)) {
       return callback('Same user is live in this session. Please terminate or join your previous session.');
     }
