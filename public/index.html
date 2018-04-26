@@ -49,7 +49,6 @@
         var timestamp = new Date().getTime().toString();
         var user = CryptoJS.AES.encrypt(document.getElementsByName("name")[0].value, timestamp).toString();
         var session = CryptoJS.AES.encrypt(document.getElementsByName("room")[0].value, timestamp).toString();
-        // sessionStorage.setItem('star', timestamp);
         window.location.href = `chat?name=${user}&room=${session}&k=${timestamp}`;
         return false;
       });
