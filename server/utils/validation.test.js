@@ -1,6 +1,6 @@
 const expect = require('expect');
 
-let { isRealString } = require('./validation');
+let { isRealString, isDuplicate } = require('./validation');
 
 describe ('isRealString' , () => {
   it ('should return true if arg is a valid string', () => {
@@ -13,5 +13,27 @@ describe ('isRealString' , () => {
 
   it ('should reject string with only spaces', () => {
     expect(isRealString('    ')).toBe(false);
+  })
+});
+
+describe ('isDuplicate', () => {
+  let users = [{
+    id: '1',
+    name: 'Panda',
+    room: 'secret'
+  }, {
+    id: '1',
+    name: 'Lion',
+    room: 'secret'
+  }];
+
+  it ('should return duplicate entry', () => {
+    let res = isDuplicate({name: 'Panda', room: 'secret'}, users);
+    expect(res).not.toBeUndefined();
+  })
+
+  it ('should not return duplicate entry', () => {
+    let res = isDuplicate({name: 'Panda', room: 'secret1'}, users);
+    expect(res).toBeUndefined();
   })
 });

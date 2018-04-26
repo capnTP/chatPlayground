@@ -4,7 +4,7 @@ const moment = require('moment');
 // date.add(1, 'M');
 // console.log(date.format('MMM Do YYYY'));
 
-let someTimeStamp = moment().valueOf();
+let someTimeStamp = new Date().getTime().toString();
 console.log(someTimeStamp);
 
 let createdAt = 1234;

@@ -2,12 +2,20 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" charset="utf-8">
-    <title>Join | The Chat Playground</title>
+    <script src="/js/libs/jquery-3.3.1.min.js"></script>
+    <script src="/js/libs/babel.min.js"></script>
+    <script src="/js/libs/crypto-js.min.js"></script>
+    <script src="/js/libs/popper.min.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/libs/bootbox.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
+
+    <title>Join | The Chat Playground</title>
   </head>
   <body class="centered-form">
     <div class="centered-form_form">
-      <form action="/chat">
+      <form id="login">
         <div class="form-field">
           <h3>Join a Playground</h3>
         </div>
@@ -24,5 +32,28 @@
         </div>
       </form>
     </div>
+
+    <script type="text/babel">
+      document.getElementById("login").addEventListener("submit", function(e) {
+        e.preventDefault();
+        if (document.getElementsByName("name")[0].value.trim().length === 0 || document.getElementsByName("room")[0].value.trim().length === 0) {
+          bootbox.alert({
+            message: "Your name and session are required!",
+            backdrop: true,
+            callback: () => {
+              window.location.href = '/';
+            }
+          })
+          return false;
+        }
+        var timestamp = new Date().getTime().toString();
+        var user = CryptoJS.AES.encrypt(document.getElementsByName("name")[0].value, timestamp).toString();
+        var session = CryptoJS.AES.encrypt(document.getElementsByName("room")[0].value, timestamp).toString();
+        // sessionStorage.setItem('star', timestamp);
+        window.location.href = `chat?name=${user}&room=${session}&k=${timestamp}`;
+        return false;
+      });
+
+    </script>
   </body>
 </html>

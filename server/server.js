@@ -3,9 +3,10 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 const hbs = require('hbs');
+const CryptoJS = require('crypto-js');
 
 const { generateMessage, generateLocationMessage } = require('./utils/message');
-const { isRealString } = require('./utils/validation');
+const { isRealString, isDuplicate } = require('./utils/validation');
 const { Users } = require('./utils/users');
 const publicPath = path.join(__dirname , '..', '/public');
 let port = process.env.PORT || 5000;
@@ -27,17 +28,19 @@ io.on('connection', (socket) => {
   console.log('New user connected!');
 
   socket.on('join', (params, callback) => {
-    if (!isRealString(params.name) || !isRealString(params.room)) {
-      return callback('Your name and session to join are required.');
+    let user = CryptoJS.AES.decrypt(params.name, params.k).toString(CryptoJS.enc.Utf8);
+    let session = CryptoJS.AES.decrypt(params.room, params.k).toString(CryptoJS.enc.Utf8);
+    if (isDuplicate({user, session}, users.users)) {
+      return callback('Same user is live in this session. Please terminate or join your previous session.');
     }
 
-    socket.join(params.room);
+    socket.join(session);
     users.removeUser(socket.id);
-    users.addUser(socket.id, params.name, params.room);
+    users.addUser(socket.id, user, session);
 
-    io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+    io.to(session).emit('updateUserList', users.getUserList(session));
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the Chat Playground'));
-    socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
+    socket.broadcast.to(session).emit('newMessage', generateMessage('Admin', `${user} has joined.`));
     callback();
   });
 
